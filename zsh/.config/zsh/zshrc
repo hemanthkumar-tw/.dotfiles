@@ -1,0 +1,4 @@
+source ~/.config/zsh/custom.zsh
+
+fpath+=~/.zfunc
+autoload -Uz compinit && [[ -f ~/.zcompdump ]] && compinit -C || compinit

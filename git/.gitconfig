@@ -1,0 +1,16 @@
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    last = log -1 HEAD
+    lg = log --oneline --graph --all --decorate
+    lt = log --color --graph --pretty=format:'%Cred%h%Creset %C(bold)%(trailers:key=Refs,valueonly,separator=%x2c)%Creset - %s %Cgreen(%cr)%C(bold blue) <%an>%C(nobold yellow)%d%Creset' --abbrev-commit
+
+[includeIf "gitdir:/Users/hemanth/Documents/Org/"]
+    path = ~/.gitconfig-work
+
+[includeIf "gitdir:/Users/hemanth/Documents/Hemanth/"]
+    path = ~/.gitconfig-personal
+
+
