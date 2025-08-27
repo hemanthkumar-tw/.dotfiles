@@ -1,11 +1,18 @@
 [alias]
-    co = checkout
-    br = branch
-    ci = commit
-    st = status
-    last = log -1 HEAD
-    lg = log --oneline --graph --all --decorate
-    lt = log --color --graph --pretty=format:'%Cred%h%Creset %C(bold)%(trailers:key=Refs,valueonly,separator=%x2c)%Creset - %s %Cgreen(%cr)%C(bold blue) <%an>%C(nobold yellow)%d%Creset' --abbrev-commit
+    br      = branch
+    ci      = commit
+    co      = checkout
+    delb    = "!f() { git branch -d \"$1\" && git push origin --delete \"$1\"; }; f"
+    fp      = push --force-with-lease
+    last    = log -1 HEAD
+    lg      = log --oneline --graph --all --decorate
+    lt      = log --color --graph --pretty=format:'%Cred%h%Creset %C(bold)%(trailers:key=Refs,valueonly,separator=%x2c)%Creset - %s %Cgreen(%cr)%C(bold blue) <%an>%C(nobold yellow)%d%Creset' --abbrev-commit
+    nb      = "!f() { git checkout -b \"$1\"; }; f"
+    slog    = log --oneline --decorate --graph --stat
+    st      = status
+    sw      = switch
+    unstage = reset HEAD --
+
 
 [includeIf "gitdir:/Users/hemanth/Documents/Org/"]
     path = ~/.gitconfig-work
