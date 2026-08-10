@@ -5,8 +5,8 @@ return {
       filtered_items = {
         visible = true,
         hide_by_name = {
-          '.DS_Store',
-        }
+          ".DS_Store",
+        },
       },
     },
   },
