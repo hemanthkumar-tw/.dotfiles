@@ -8,13 +8,22 @@ return {
   "AstroNvim/astrocore",
   ---@type AstroCoreOpts
   opts = {
-   
+    -- Custom autocommands
+    autocmds = {
+      autosave = {
+        {
+          event = { "InsertLeave", "TextChanged", "FocusLost" },
+          desc = "Autosave file on focus loss or text changes",
+          command = "silent! update",
+        },
+      },
+    },
     -- Configure core features of AstroNvim
     features = {
-      large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
+      large_buf = { size = 1.5 * 1024 * 1024, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
       cmp = true, -- enable completion at start
-      diagnostics_mode = 3, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
+      diagnostics = { virtual_text = true, virtual_lines = false }, -- diagnostic settings on startup
       highlighturl = true, -- highlight URLs at start
       notifications = true, -- enable notifications at start
     },
@@ -22,6 +31,19 @@ return {
     diagnostics = {
       virtual_text = true,
       underline = true,
+    },
+    -- passed to `vim.filetype.add`
+    filetypes = {
+      -- see `:h vim.filetype.add` for usage
+      extension = {
+        foo = "fooscript",
+      },
+      filename = {
+        [".foorc"] = "fooscript",
+      },
+      pattern = {
+        [".*/etc/foo/.*"] = "fooscript",
+      },
     },
     -- vim options can be configured here
     options = {
@@ -31,16 +53,10 @@ return {
         spell = false, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = true, -- sets vim.opt.wrap
-        ignorecase = true,
-        smartcase = true,
         hlsearch = false,
         incsearch = true,
-        scrolloff = 15,
-        updatetime = 50,
-        cursorline = true,
-        termguicolors = true,
-        background = "dark",
-        backspace = "indent,eol,start",
+        scrolloff = 20,
+        updatetime = 100,
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
@@ -75,24 +91,21 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+
         ["<Leader>sv"] = { "<C-w>v", desc = "[S]plit window [V]ertically" },
         ["<Leader>sh"] = { "<C-w>s", desc = "[S]plit window [H]orizontally" },
         ["<Leader>se"] = { "<C-w>=", desc = "Make splits [E]qual [S]ize" },
         ["<Leader>sx"] = { "<cmd>close<CR>", desc = "Close current split screen" },
-        
-        -- ["<C-h>"] = { "<cmd>TmuxNavigateLeft<CR>", desc = "window left" },
-        -- ["<C-l>"] = { "<cmd>TmuxNavigateRight<CR>", desc = "window right" },
-        -- ["<C-k>"] = { "<cmd>TmuxNavigateUp<CR>", desc = "window up" },
-        -- ["<C-j>"] = { "<cmd>TmuxNavigateDown<CR>", desc = "window down" },
 
+        -- vim navigations
         ["gh"] = { "^", desc = "Go to the beginning of the line" },
         ["gl"] = { "$", desc = "Go to the end of the line" },
         ["gj"] = { "G", desc = "Go to the end of the file" },
         ["gk"] = { "gg", desc = "Go to the beginning of the file" },
 
-        ["<Leader>fs"] = { ":Telescope live_grep custom=multi_rg<cr>", noremap = true },
-        ["-"] = {"<CMD>Oil<CR>", desc = "Open parent directory"},
-        ["gD"] = {"<CMD>lua vim.lsp.buf.definition()<CR>", noremap = true, desc = "Custom kepmap for gD"},
+        -- ["<Leader>fs"] = { ":Telescope live_grep custom=multi_rg<cr>", noremap = true },
+        ["-"] = { "<CMD>Oil<CR>", desc = "Open parent directory" },
+        ["gD"] = { "<CMD>lua vim.lsp.buf.definition()<CR>", noremap = true, desc = "Custom kepmap for gD" },
       },
       v = {
         ["gh"] = { "^", desc = "Go to the beginning of the line" },
@@ -104,6 +117,5 @@ return {
         ["jk"] = { "<ESC>", desc = "Exit insert mode with jk" },
       },
     },
-    
   },
 }

@@ -9,11 +9,11 @@ return {
   ---@type AstroUIOpts
   opts = {
     -- change colorscheme
+    -- colorscheme = "catppuccin-nvim",
     colorscheme = "github_dark_default",
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
     highlights = {
       init = { -- this table overrides highlights in all themes
-        -- Normal
         Normal = { bg = "none" },
         SignColumn = { bg = "none" },
         FoldColumn = { bg = "none" },
@@ -86,7 +86,7 @@ return {
         NotifyTRACEBorder = { bg = "none" },
         NotifyBackground = { bg = "#000000" },
       },
-      astrotheme = { -- a table of overrides/changes when applying the astrotheme theme
+      astrodark = { -- a table of overrides/changes when applying the astrotheme theme
         -- Normal = { bg = "#000000" },
       },
     },
