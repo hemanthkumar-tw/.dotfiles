@@ -1,4 +1,5 @@
 [alias]
+    aliases = config --get-regexp '^alias\\.'
     br      = branch
     ci      = commit
     co      = checkout
@@ -6,12 +7,14 @@
     fp      = push --force-with-lease
     last    = log -1 HEAD
     lg      = log --oneline --graph --all --decorate
-    lt      = log --color --graph --pretty=format:'%Cred%h%Creset %C(bold)%(trailers:key=Refs,valueonly,separator=%x2c)%Creset - %s %Cgreen(%cr)%C(bold blue) <%an>%C(nobold yellow)%d%Creset' --abbrev-commit
+    ltf      = log --color --graph --pretty=format:'%Cred%h%Creset %C(bold)%(trailers:key=Refs,valueonly,separator=%x2c)%Creset - %s %Cgreen(%cr)%C(bold blue) <%an>%C(nobold yellow)%d%Creset' --abbrev-commit
+    lt = "!git ltf | head"
     nb      = "!f() { git checkout -b \"$1\"; }; f"
     slog    = log --oneline --decorate --graph --stat
     st      = status
     sw      = switch
     unstage = reset HEAD --
+    cleanup = "!git branch --merged | grep -Ev '(^\\*|main|master|develop)' | xargs -r git branch -d"
 
 
 [includeIf "gitdir:/Users/hemanth/Documents/Org/"]
@@ -20,4 +23,24 @@
 [includeIf "gitdir:/Users/hemanth/Documents/Hemanth/"]
     path = ~/.gitconfig-personal
 
+
+[rebase]
+	updateRefs = true
+
+;; git-delta config
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    ; dark = true      # or light = true, or omit for auto-detection
+    line-numbers = true
+    side-by-side = true
+    true-color = always
+
+[merge]
+    conflictStyle = zdiff3
 
