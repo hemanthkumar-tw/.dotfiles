@@ -1,4 +1,10 @@
+# For profiling startup time (enable only when debugging)
+# zmodload zsh/zprof
+
+# fpath+=~/.zfunc
+# autoload -Uz compinit && [[ -f ~/.zcompdump ]] && compinit -C || compinit
+
 source ~/.config/zsh/custom.zsh
 
-fpath+=~/.zfunc
-autoload -Uz compinit && [[ -f ~/.zcompdump ]] && compinit -C || compinit
+# Dump profile (only if zprof was loaded)
+# zprof
