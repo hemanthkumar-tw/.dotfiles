@@ -105,7 +105,7 @@ return {
 
         -- ["<Leader>fs"] = { ":Telescope live_grep custom=multi_rg<cr>", noremap = true },
         ["-"] = { "<CMD>Oil<CR>", desc = "Open parent directory" },
-        ["gD"] = { "<CMD>lua vim.lsp.buf.definition()<CR>", noremap = true, desc = "Custom kepmap for gD" },
+        -- ["gD"] = { "<CMD>lua vim.lsp.buf.definition()<CR>", noremap = true, desc = "Custom kepmap for gD" },
       },
       v = {
         ["gh"] = { "^", desc = "Go to the beginning of the line" },
