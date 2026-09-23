@@ -29,6 +29,7 @@
 
 ;; git-delta config
 [core]
+    editor = nvim
     pager = delta
 
 [interactive]
