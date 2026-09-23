@@ -21,7 +21,7 @@ return {
         enabled = true, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
-          "python"
+          "python",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
           -- "python",
@@ -53,34 +53,34 @@ return {
       -- the key is the server that is being setup with `vim.lsp.config`
       -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
 
+      -- basedpyright = function(server)
+      --   local cwd = vim.fn.getcwd()
+      --   local is_uv_project = vim.fn.filereadable(cwd .. "/uv.lock") == 1
+      --     or vim.fn.filereadable(cwd .. "/pyproject.toml") == 1
+      --
+      --   if is_uv_project then
+      --     local lsp_opts = vim.lsp.config[server]
+      --     local base_cmd = lsp_opts.cmd or { "basedpyright-langserver", "--stdio" }
+      --     lsp_opts.cmd = { "uv", "run", unpack(base_cmd) }
+      --   end
+      --
+      --   vim.lsp.enable(server)
+      -- end,
 
-      basedpyright = function(server)
-        local cwd = vim.fn.getcwd()
-        local is_uv_project = vim.fn.filereadable(cwd .. "/uv.lock") == 1 or vim.fn.filereadable(cwd .. "/pyproject.toml") == 1
-
-        if is_uv_project then
-          local lsp_opts = vim.lsp.config[server]
-          local base_cmd = lsp_opts.cmd or { "basedpyright-langserver", "--stdio" }
-          lsp_opts.cmd = { "uv", "run", unpack(base_cmd) }
-        end
-
-        vim.lsp.enable(server)
-      end,
-      
-      ruff = function(server)
-        local cwd = vim.fn.getcwd()
-        local is_uv_project = vim.fn.filereadable(cwd .. "/uv.lock") == 1
-          or vim.fn.filereadable(cwd .. "/pyproject.toml") == 1
-
-        if is_uv_project then
-          local lsp_opts = vim.lsp.config[server]
-          local base_cmd = lsp_opts.cmd or { "ruff", "server" }
-          
-          lsp_opts.cmd = { "uv", "run", unpack(base_cmd) }
-        end
-
-        vim.lsp.enable(server)
-      end,
+      -- ruff = function(server)
+      --   local cwd = vim.fn.getcwd()
+      --   local is_uv_project = vim.fn.filereadable(cwd .. "/uv.lock") == 1
+      --     or vim.fn.filereadable(cwd .. "/pyproject.toml") == 1
+      --
+      --   if is_uv_project then
+      --     local lsp_opts = vim.lsp.config[server]
+      --     local base_cmd = lsp_opts.cmd or { "ruff", "server" }
+      --
+      --     lsp_opts.cmd = { "uv", "run", unpack(base_cmd) }
+      --   end
+      --
+      --   vim.lsp.enable(server)
+      -- end,
     },
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {
@@ -108,11 +108,13 @@ return {
     mappings = {
       n = {
         -- a `cond` key can provided as the string of a server capability to be required to attach, or a function with `client` and `bufnr` parameters from the `on_attach` that returns a boolean
-        gD = {
-          function() vim.lsp.buf.declaration() end,
-          desc = "Declaration of current symbol",
-          cond = "textDocument/declaration",
-        },
+
+        -- gD = {
+        --   function() vim.lsp.buf.declaration() end,
+        --   desc = "Declaration of current symbol",
+        --   cond = "textDocument/declaration",
+        -- },
+
         ["<Leader>uY"] = {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight (buffer)",
