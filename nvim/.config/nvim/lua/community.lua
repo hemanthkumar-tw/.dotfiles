@@ -23,6 +23,7 @@ return {
   { import = "astrocommunity.docker.lazydocker" },
   { import = "astrocommunity.pack.bash" },
 
+  { import = "astrocommunity.editing-support.neogen" },
   { import = "astrocommunity.motion.tabout-nvim" },
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.motion.flash-nvim" },
