@@ -17,6 +17,7 @@ return {
         -- install formatters
         "stylua",
         "sql-formatter",
+        "prettier",
 
         -- install debuggers
         "debugpy",
